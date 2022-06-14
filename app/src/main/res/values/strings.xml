@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ChatApp</string>
+    <string name="otp_message">We will send you <b><big>One Time Password</big></b></string>
+    <string name="myText">Some text in message</string>
+</resources>
