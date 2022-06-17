@@ -16,6 +16,10 @@
         <entry key="app/src/main/res/layout/activity_otpactivity.xml" value="0.2573710123697917" />
         <entry key="app/src/main/res/layout/activity_setup_profile.xml" value="0.30833333333333335" />
         <entry key="app/src/main/res/layout/delete_layout.xml" value="0.3425925925925926" />
+        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.32779947916666663" />
+        <entry key="app/src/main/res/layout/fragment_contacts.xml" value="0.4244791666666667" />
+        <entry key="app/src/main/res/layout/fragment_otp.xml" value="0.2837565104166667" />
+        <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.2507746378580729" />
         <entry key="app/src/main/res/layout/item_profile.xml" value="0.375" />
         <entry key="app/src/main/res/layout/receive_msg.xml" value="0.3425925925925926" />
         <entry key="app/src/main/res/layout/send_msg.xml" value="0.3425925925925926" />

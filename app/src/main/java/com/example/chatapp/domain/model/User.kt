@@ -1,4 +1,4 @@
-package com.example.chatapp.model
+package com.example.chatapp.domain.model
 
 data class User(
     val uuid: String? = null,
