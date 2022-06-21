@@ -10,7 +10,6 @@ import javax.inject.Inject
 class VerifyPhoneNumberUseCase @Inject constructor(
     private val firebaseRepository: FirebaseRepository
 ) {
-    suspend operator fun invoke(credential: PhoneAuthCredential): Flow<DataState<Boolean>> = flow {
+    suspend operator fun invoke(credential: PhoneAuthCredential): Flow<DataState<Boolean>> =
         firebaseRepository.verifyPhoneNumber(credential)
-    }
 }

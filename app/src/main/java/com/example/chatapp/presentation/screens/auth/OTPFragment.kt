@@ -43,6 +43,7 @@ class OTPFragment: Fragment(R.layout.fragment_otp) {
         dialog!!.setCancelable(false)
         dialog!!.show()
         firebaseAuth = FirebaseAuth.getInstance()
+        binding.phoneLabel.text = args.phoneNumber
 
         val options = PhoneAuthOptions.newBuilder(firebaseAuth!!)
             .setPhoneNumber(args.phoneNumber)
@@ -51,28 +52,36 @@ class OTPFragment: Fragment(R.layout.fragment_otp) {
             .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 override fun onVerificationCompleted(p0: PhoneAuthCredential) {}
 
-                override fun onVerificationFailed(p0: FirebaseException) {}
+                override fun onVerificationFailed(p0: FirebaseException) {
+                    Toast.makeText(requireContext(), "Verification failed", Toast.LENGTH_SHORT).show()
+                    dialog!!.dismiss()
+                    findNavController().popBackStack()
+                }
 
-                override fun onCodeSent(verifyId: String, forceResendingToken: PhoneAuthProvider.ForceResendingToken) {
+                override fun onCodeSent(
+                    verifyId: String,
+                    forceResendingToken: PhoneAuthProvider.ForceResendingToken
+                ) {
                     super.onCodeSent(verifyId, forceResendingToken)
                     dialog!!.dismiss()
                     verificationId = verifyId
                     val imm = getSystemService(requireContext(), InputMethodManager::class.java)
-                    imm?.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+                    imm?.showSoftInput(requireView(), 0)
                     binding.otpView.requestFocus()
                 }
             }).build()
 
         PhoneAuthProvider.verifyPhoneNumber(options)
-        binding.otpView.setOtpCompletionListener{ otp ->
+        binding.otpView.setOtpCompletionListener { otp ->
             val credential = PhoneAuthProvider.getCredential(verificationId!!, otp)
             viewModel.verifyPhoneNumber(credential)
         }
-        viewModel.authResultLiveData.observe(viewLifecycleOwner){ dataState ->
-            when(dataState){
-                is DataState.Success ->{
+
+        viewModel.authResultLiveData.observe(viewLifecycleOwner) { dataState ->
+            when (dataState) {
+                is DataState.Success -> {
                     findNavController().navigate(
-                        OTPFragmentDirections.actionOTPFragmentToContactsFragment()
+                        OTPFragmentDirections.actionOTPFragmentToSetupProfileFragment()
                     )
                 }
                 is DataState.Error -> {

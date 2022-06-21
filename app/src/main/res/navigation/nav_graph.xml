@@ -24,14 +24,12 @@
         android:name="com.example.chatapp.presentation.screens.auth.OTPFragment"
         android:label="fragment_otp"
         tools:layout="@layout/fragment_otp" >
-        <action
-            android:id="@+id/action_OTPFragment_to_contactsFragment"
-            app:destination="@id/contactsFragment"
-            app:popUpTo="@id/OTPFragment"
-            app:popUpToInclusive="true" />
         <argument
             android:name="phoneNumber"
             app:argType="string" />
+        <action
+            android:id="@+id/action_OTPFragment_to_setupProfileFragment"
+            app:destination="@id/setupProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/contactsFragment"
@@ -46,5 +44,20 @@
         android:id="@+id/chatFragment"
         android:name="com.example.chatapp.presentation.screens.chat.ChatFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat" >
+        <argument
+            android:name="user"
+            app:argType="com.example.chatapp.domain.model.User" />
+    </fragment>
+    <fragment
+        android:id="@+id/setupProfileFragment"
+        android:name="com.example.chatapp.presentation.screens.setup.SetupProfileFragment"
+        android:label="fragment_setup_profile"
+        tools:layout="@layout/fragment_setup_profile" >
+        <action
+            android:id="@+id/action_setupProfileFragment_to_contactsFragment"
+            app:destination="@id/contactsFragment"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

@@ -4,6 +4,7 @@ import com.example.chatapp.data.remote.FirebaseRepositoryImpl
 import com.example.chatapp.domain.repository.FirebaseRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,11 +29,18 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideFirebaseStorage(): FirebaseStorage{
+        return FirebaseStorage.getInstance()
+    }
+
+    @Provides
+    @Singleton
     fun provideFirebaseRepository(
         auth: FirebaseAuth,
-        db: FirebaseDatabase
+        db: FirebaseDatabase,
+        storage: FirebaseStorage
     ): FirebaseRepository{
-        return FirebaseRepositoryImpl(auth, db)
+        return FirebaseRepositoryImpl(auth, db, storage)
     }
 
 }
